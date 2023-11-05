@@ -1,12 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import '../../../src/index.css'
 
 const Navbar = () => {
 
     const links = <div className="flex flex-col gap-3 lg:flex-row md:gap-6 text-lg font-medium">
         <NavLink to="/">Home</NavLink>
-        <NavLink to="all-food-items">ALL Food Items</NavLink>
-        <NavLink to="blog">Blog</NavLink>
+        <NavLink to="/all-food-items">ALL Food Items</NavLink>
+        <NavLink to="/blog">Blog</NavLink>
     </div>
 
     return (
@@ -41,7 +41,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="">
-                    <a className="btn btn-outline capitalize w-24 text-xl font-semibold text-pink-600">Login</a>
+                    <Link to='/login' className="btn btn-outline capitalize w-24 text-xl font-semibold text-pink-600">Login</Link>
                 </div>
             </div>
         </div>
