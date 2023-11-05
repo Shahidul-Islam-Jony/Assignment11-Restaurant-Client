@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
-    const { login } = useContext(AuthContext);
+    const { login, loginByGoogle } = useContext(AuthContext);
 
     const handleLogin = e => {
         e.preventDefault();
@@ -17,6 +17,36 @@ const Login = () => {
         const password = form.password.value;
         // console.log(email,password);
         login(email, password)
+            .then(result => {
+                console.log(result);
+                toast.success('Login Successful !', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            })
+            .catch(error => {
+                toast.error(`${error}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                return;
+            })
+    }
+
+    const handleLoginByGoogle = () => {
+        loginByGoogle()
             .then(result => {
                 console.log(result);
                 toast.success('Login Successful !', {
@@ -76,7 +106,7 @@ const Login = () => {
                         </form>
                         <div>
                             <div className="divider">OR</div>
-                            <button className='btn btn-outline w-full text-lg border-pink-600 capitalize'><FcGoogle className='text-3xl mr-4'></FcGoogle>Login With Google</button>
+                            <button onClick={handleLoginByGoogle} className='btn btn-outline w-full text-lg border-pink-600 capitalize'><FcGoogle className='text-3xl mr-4'></FcGoogle>Login With Google</button>
                         </div>
                     </div>
                 </div>
