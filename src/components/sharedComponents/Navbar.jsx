@@ -71,8 +71,8 @@ const Navbar = () => {
                     {
                         user ? <div className="flex items-center gap-2">
                             <div className="flex items-center gap-2">
-                                <p>{user.displayName}</p>
-                                <img src={user.photoURL} className="w-12 h-12 rounded-full" alt="" />
+                                {/* <p className="text-lg font-medium">{user.displayName}</p> */}
+                                <img title={user.displayName} src={user.photoURL} className="w-12 h-12 rounded-full" alt="" />
                             </div>
                             <button onClick={handleLogout} className="btn btn-outline capitalize w-24 text-xl font-semibold text-pink-600">Logout</button>
                         </div> :

@@ -10,7 +10,7 @@ const ErrorPage = () => {
                 error?.status === 404 && <div className='text-center'>
                     <img src={errorImg} className='h-[450px] w-full' alt="" />
                     <p className='text-5xl font-bold text-center mt-4'>Page Not Found</p>
-                    <Link className='btn btn-secondary mt-4 px-16' to='/'>Go Back</Link>
+                    <Link className='btn btn-secondary mt-4 px-16' to='/'>Go Back to home</Link>
                 </div>
             }
         </div>
