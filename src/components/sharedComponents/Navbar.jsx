@@ -1,13 +1,40 @@
 import { Link, NavLink } from "react-router-dom";
 import '../../../src/index.css'
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
+
+    const { user,logout } = useContext(AuthContext);
+    // console.log(user);
 
     const links = <div className="flex flex-col gap-3 lg:flex-row md:gap-6 text-lg font-medium">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/all-food-items">ALL Food Items</NavLink>
         <NavLink to="/blog">Blog</NavLink>
     </div>
+
+    const handleLogout =()=>{
+        logout()
+        .then(result=>{
+            console.log(result);
+            toast.success('Logout Successful !', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
 
     return (
         <div>
@@ -41,9 +68,19 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="">
-                    <Link to='/login' className="btn btn-outline capitalize w-24 text-xl font-semibold text-pink-600">Login</Link>
+                    {
+                        user ? <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2">
+                                <p>{user.displayName}</p>
+                                <img src={user.photoURL} className="w-12 h-12 rounded-full" alt="" />
+                            </div>
+                            <button onClick={handleLogout} className="btn btn-outline capitalize w-24 text-xl font-semibold text-pink-600">Logout</button>
+                        </div> :
+                            <Link to='/login' className="btn btn-outline capitalize w-24 text-xl font-semibold text-pink-600">Login</Link>
+                    }
                 </div>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };
