@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
 
-    const { user,logout } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
     // console.log(user);
 
     const links = <div className="flex flex-col gap-3 lg:flex-row md:gap-6 text-lg font-medium">
@@ -16,24 +16,24 @@ const Navbar = () => {
         <NavLink to="/blog">Blog</NavLink>
     </div>
 
-    const handleLogout =()=>{
+    const handleLogout = () => {
         logout()
-        .then(result=>{
-            console.log(result);
-            toast.success('Logout Successful !', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-        })
-        .catch(error=>{
-            console.log(error);
-        })
+            .then(result => {
+                console.log(result);
+                toast.success('Logout Successful !', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     return (
@@ -72,7 +72,21 @@ const Navbar = () => {
                         user ? <div className="flex items-center gap-2">
                             <div className="flex items-center gap-2">
                                 {/* <p className="text-lg font-medium">{user.displayName}</p> */}
-                                <img title={user.displayName} src={user.photoURL} className="w-12 h-12 rounded-full" alt="" />
+
+                                <div className="dropdown dropdown-end">
+                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-full">
+                                            <img src={user.photoURL} title={user.displayName} />
+                                        </div>
+                                    </label>
+                                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52 font-medium">
+                                        <li><Link>My added food items</Link></li>
+                                        <li><Link>Add a food item</Link></li>
+                                        <li><Link>My ordered food items</Link></li>
+                                    </ul>
+                                </div>
+
+
                             </div>
                             <button onClick={handleLogout} className="btn btn-outline capitalize w-24 text-xl font-semibold text-pink-600">Logout</button>
                         </div> :
