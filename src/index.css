@@ -11,3 +11,7 @@ a.active{
     font-weight: bold;
     font-size: larger;
 }
+
+.textShadow{
+    text-shadow: 3px 2px #DB2777;
+}
