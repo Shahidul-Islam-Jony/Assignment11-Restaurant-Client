@@ -29,7 +29,7 @@ const Login = () => {
                                 <input className='btn btn-secondary capitalize text-xl font-semibold' type="submit" value="Login" />
                             </div>
                             <div className='text-center mt-4'>
-                                <p>Do not have account ? Please <Link to='/registration' className='font-medium hover:underline text-secondary'>Create an account</Link></p>
+                                <p>Do not have account ? Please <Link to='/registration' className='font-medium hover:underline text-secondary ml-2'>Create an account</Link></p>
                             </div>
                         </form>
                         <div>
