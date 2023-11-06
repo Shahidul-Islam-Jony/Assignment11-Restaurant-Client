@@ -1,8 +1,5 @@
 
-const AllFoodItems = () => {
-
-    
-
+const UpdateFood = () => {
     return (
         <div>
             
@@ -10,4 +7,4 @@ const AllFoodItems = () => {
     );
 };
 
-export default AllFoodItems;
+export default UpdateFood;

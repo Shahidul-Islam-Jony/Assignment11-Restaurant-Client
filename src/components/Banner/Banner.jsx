@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Banner = () => {
     return (
@@ -8,7 +9,7 @@ const Banner = () => {
                     <h2 className="text-3xl font-medium mb-3">Explore Our Culinary Delights</h2>
                     <p className="font-medium">Welcome to Food Fantasia, where culinary artistry meets warm hospitality.<br /> Our menu is a symphony of flavors, crafted with the finest ingredients and a passion <br /> for gastronomy.Whether you are a connoisseur of fine dining or simply seeking a <br /> delightful meal, our restaurant offers an unforgettable experience.Join us <br /> and indulge in a culinary journey that will tantalize your taste buds <br /> and leave you with unforgettable memories</p>
 
-                    <button className="btn btn-secondary mt-4 capitalize font-medium px-5 text-lg">See Menus</button>
+                    <Link to='/all-food-items' className="btn btn-secondary mt-4 capitalize font-medium px-5 text-lg">See Menus</Link>
                 </div>
             </div>
         </div>

@@ -6,6 +6,8 @@ import Blog from "../pages/Blog/Blog";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import MyAddedFoodItems from "../pages/MyAddedFoodItems/MyAddedFoodItems";
+import UpdateFood from "../pages/UpdateFood/UpdateFood";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +34,13 @@ const router = createBrowserRouter([
             {
                 path:'/registration',
                 element:<Registration></Registration>
+            },{
+                path:'/my-added-food-items',
+                element:<MyAddedFoodItems></MyAddedFoodItems>
+            },
+            {
+                path:'/updateFood/:id',
+                element:<UpdateFood></UpdateFood>
             }
         ]
     }
