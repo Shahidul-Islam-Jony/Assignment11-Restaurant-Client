@@ -58,7 +58,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="flex items-center gap-2 md:gap-4">
-                        <img src="logo2.jpg" className="w-10 h-10 md:w-16 md:h-16 border-4 md:border-8 border-pink-600 rounded-full" alt="" />
+                        <img src="/logo2.jpg" className="w-10 h-10 md:w-16 md:h-16 border-4 md:border-8 border-pink-600 rounded-full" alt="" />
                         <p className="text-xl md:text-3xl font-bold text-pink-600">Food Fantasia</p>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ const Navbar = () => {
                                     </label>
                                     <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52 font-medium">
                                         <li><Link to='/my-added-food-items'>My added food items</Link></li>
-                                        <li><Link>Add a food item</Link></li>
+                                        <li><Link to='/addFood'>Add a food item</Link></li>
                                         <li><Link>My ordered food items</Link></li>
                                     </ul>
                                 </div>

@@ -8,6 +8,7 @@ import Registration from "../pages/Registration/Registration";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import MyAddedFoodItems from "../pages/MyAddedFoodItems/MyAddedFoodItems";
 import UpdateFood from "../pages/UpdateFood/UpdateFood";
+import AddAFood from "../pages/AddAFood/AddAFood";
 
 const router = createBrowserRouter([
     {
@@ -40,7 +41,12 @@ const router = createBrowserRouter([
             },
             {
                 path:'/updateFood/:id',
-                element:<UpdateFood></UpdateFood>
+                element:<UpdateFood></UpdateFood>,
+                loader:({params})=>fetch(`http://localhost:5000/api/v1/findSingleFood/${params.id}`)
+            },
+            {
+                path:'/addFood',
+                element:<AddAFood></AddAFood>
             }
         ]
     }

@@ -26,7 +26,7 @@ const Footer = () => {
             </footer>
             <footer className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
                 <aside className="items-center grid-flow-col">
-                    <img src="logo2.jpg" className="h-20 w-20 rounded-full" alt="" />
+                    <img src="/logo2.jpg" className="h-20 w-20 rounded-full" alt="" />
                     <p className="text-lg">Food Fantasia<br /><span className="text-base">&copy; Copyright 2023</span></p>
                 </aside>
                 <nav className="md:place-self-center md:justify-self-end">
