@@ -5,7 +5,7 @@ const AllFoodItems = () => {
 
     return (
         <div>
-            
+            Hello
         </div>
     );
 };

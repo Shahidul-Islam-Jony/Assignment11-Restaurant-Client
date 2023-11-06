@@ -2,28 +2,30 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
-import { RotatingLines } from "react-loader-spinner";
+import { Audio } from "react-loader-spinner";
 
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
 
     if (loading) {
-        <div>
-            <RotatingLines
-                strokeColor="grey"
-                strokeWidth="5"
-                animationDuration="0.75"
-                width="96"
+        return <div className="flex justify-center">
+            <Audio
+                height="100"
+                width="100"
+                color="#4fa94d"
+                ariaLabel="audio-loading"
+                wrapperStyle={{}}
+                wrapperClass="wrapper-class"
                 visible={true}
             />
         </div>
     }
-    if (!user) {
+    if (user) {
         return children;
     }
-    return <Navigate></Navigate>
+    return <Navigate state={location?.pathname} to='/login'></Navigate>
 };
 
 PrivateRoute.propTypes = {

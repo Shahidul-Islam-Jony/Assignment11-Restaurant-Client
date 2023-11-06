@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginimg from '../../assets/images/login.jpg'
 import { FcGoogle } from 'react-icons/fc';
 import { useContext } from 'react';
@@ -9,6 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
 
     const { login, loginByGoogle } = useContext(AuthContext);
+    const location = useLocation();
+    // console.log(location);
+    const navigate = useNavigate();
 
     const handleLogin = e => {
         e.preventDefault();
@@ -29,6 +32,7 @@ const Login = () => {
                     progress: undefined,
                     theme: "light",
                 });
+                navigate(location.state || '/');
             })
             .catch(error => {
                 toast.error(`${error}`, {
@@ -59,6 +63,7 @@ const Login = () => {
                     progress: undefined,
                     theme: "light",
                 });
+                navigate(location.state || '/');
             })
             .catch(error => {
                 toast.error(`${error}`, {

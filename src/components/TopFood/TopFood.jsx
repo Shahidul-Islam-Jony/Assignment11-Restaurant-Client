@@ -20,7 +20,7 @@ const TopFood = () => {
                                 <p className="font-medium">Category : {food.category}</p>
                                 <p className="font-medium">Price : $ {food.price}</p>
                                 <div className="card-actions justify-center">
-                                    <Link className="btn btn-secondary font-medium text-lg w-full">Details</Link>
+                                    <Link to={`/single-food-item/${food._id}`} className="btn btn-secondary font-medium text-lg w-full">Details</Link>
                                 </div>
                             </div>
                         </div>
