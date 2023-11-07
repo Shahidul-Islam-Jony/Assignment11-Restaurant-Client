@@ -1,11 +1,63 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 
 const AllFoodItems = () => {
+    const { count } = useLoaderData();
+    // console.log(count);
+    const foodsPerPage = 9;
+    const numOfPages = Math.ceil(count / foodsPerPage);
+    const pages = [...Array(numOfPages).keys()]
+    // console.log(pages);
+    const [currentPage, setCurrentPage] = useState(0);
+    // console.log(currentPage);
 
-    
+    const [foods,setFoods] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/v1/allFoods?page=${currentPage}&size=${foodsPerPage}`)
+            .then(result => {
+                console.log(result.data)
+                setFoods(result.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, [currentPage])
+
 
     return (
         <div>
-            Hello
+            <div className="mt-16 mb-10">
+                <h2 className="text-5xl text-center mb-10 font-bold"><span className="border-x-8 border-pink-600 textShadow px-4">All Foods</span></h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {
+                        foods?.map(food => <div key={food._id} className="">
+                            <div className="card bg-violet-200 border-4 border-pink-400 shadow-xl">
+                                <figure><img src={food.image} className="w-full m-2 h-56 rounded-lg" alt={food.name} /></figure>
+                                <div className="card-body">
+                                    <h2 className="card-title">Name : {food.name}</h2>
+                                    <p className="font-medium">Category : {food.category}</p>
+                                    <p className="font-medium">Price : $ {food.price}</p>
+                                    <div className="card-actions justify-center">
+                                        <Link to={`/single-food-item/${food._id}`} className="btn btn-secondary font-medium text-lg w-full">Details</Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>)
+                    }
+                </div>
+            </div>
+            <div className="text-center mb-16 pagination">
+                <button onClick={() => currentPage > 0 && setCurrentPage(currentPage - 1)}>&lt;&lt;  Prev</button>
+                {
+                    pages?.map(pageNum => <button
+                        onClick={() => setCurrentPage(pageNum)}
+                        className={currentPage === pageNum ? 'selected' : ''}
+                        key={pageNum}>{pageNum+1}</button>)
+                }
+                <button onClick={() => currentPage < numOfPages - 1 && setCurrentPage(currentPage + 1)}>Next  &gt;&gt;</button>
+            </div>
         </div>
     );
 };
