@@ -17,8 +17,11 @@ const UpdateFood = () => {
         const image = form.image.value;
         const made_by = form.made_by.value;
         const name = form.name.value;
-        const price = form.price.value;
-        const quantity = form.quantity.value;
+        const priceString = form.price.value;
+        const quantityString = form.quantity.value;
+
+        const price = parseInt(priceString);
+        const quantity= parseInt(quantityString);
 
         const newFood = { category, count: 0, description, food_origin, image, made_by, name, price, quantity }
         console.log(newFood);

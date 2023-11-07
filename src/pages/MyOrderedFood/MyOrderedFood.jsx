@@ -33,6 +33,7 @@ const MyOrderedorderedFood = () => {
                                 <h2 className="text-lg font-medium">Food Name : {orderedFood.name}</h2>
                                 <p className="font-medium">Food Owner : {orderedFood.foodOwner}</p>
                                 <p className="font-medium">Price : $ {orderedFood.price}</p>
+                                <p className="font-medium">Quantity : {orderedFood.quantity}</p>
                                 <p className="font-medium">Added Date : {orderedFood.date}</p>
                                 <div className="card-actions justify-center">
                                     <Link to={`/single-orderedFood-item/${orderedFood._id}`} className="btn btn-secondary btn-sm mt-4 font-medium text-lg w-full"><AiFillDelete></AiFillDelete> Delete</Link>

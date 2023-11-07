@@ -1,5 +1,5 @@
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -10,9 +10,11 @@ const FoodPurchase = () => {
     const food = useLoaderData();
     console.log(food);
     const { user } = useContext(AuthContext);
-    console.log(user);
+    // console.log(user);
     const { _id, category, description, food_origin, image, made_by, name, price } = food;
     let { count, quantity } = food;
+    let [totalPrice, setToatlPrice] = useState(price);
+    let orderedCount = 0 ;
 
     const handlePurchaseFood = e => {
         e.preventDefault();
@@ -21,8 +23,8 @@ const FoodPurchase = () => {
         const buyerName = form.buyerName.value;
         const buyerEmail = form.buyerEmail.value;
         const date = form.date.value;
-        const price = form.price.value;
-        let quantity = form.quantity.value;
+        const orderedQuantityString = form.orderedQuantity.value;
+        const orderedQuantity = parseInt(orderedQuantityString);
 
         if (user.email === buyerEmail) {
             toast.error('You can not buy your own food', {
@@ -41,8 +43,9 @@ const FoodPurchase = () => {
         // console.log(count,quantity);
 
         if (quantity !== 0) {
-            count += 1;
-            quantity -= 1;
+            orderedCount += orderedQuantity;
+            count += orderedQuantity;
+            quantity -= orderedQuantity;
         }
         if (quantity === 0) {
             toast.error('Sorry!! item is not available for now', {
@@ -71,10 +74,11 @@ const FoodPurchase = () => {
             return;
         }
 
-        const orderedFood = { count, name, price, quantity, buyerName, buyerEmail,foodOwner:made_by, date, image }
+        const orderedFood = { count:orderedCount, name, price:totalPrice, quantity: orderedQuantity, buyerName, buyerEmail, foodOwner: made_by, date, image }
         // console.log(orderedFood);
 
         const updateFood = { category, description, count, food_origin, image, made_by, name, price, quantity }
+        // console.log(updateFood);
 
         axios.post('http://localhost:5000/api/v1/user-orders', orderedFood)
             .then(result => {
@@ -114,6 +118,14 @@ const FoodPurchase = () => {
 
     }
 
+    const handleQuantityChange = (e) => {
+        // console.log(e.target.value);
+        const quantity = parseInt(e.target.value);
+        let total = quantity * price;
+        // console.log(total);
+        setToatlPrice(total)
+    }
+
     return (
         <div className="my-10">
             <form onSubmit={handlePurchaseFood}>
@@ -128,7 +140,7 @@ const FoodPurchase = () => {
                         <label className="label">
                             <span className="text-xl font-medium">Price</span>
                         </label>
-                        <input type="text" name='price' placeholder="category" defaultValue={price} className="input rounded-md w-full border-pink-600" readOnly />
+                        <input type="text" name='price' placeholder="category" defaultValue={totalPrice} className="input rounded-md w-full border-pink-600" readOnly />
                     </div>
                 </div>
                 <div className="flex flex-col lg:flex-row gap-4">
@@ -136,7 +148,7 @@ const FoodPurchase = () => {
                         <label className="label">
                             <span className="text-xl font-medium">Quantity</span>
                         </label>
-                        <input type="text" name='quantity' placeholder="quantity" defaultValue={quantity} className="input rounded-md w-full border-pink-600" readOnly />
+                        <input type="text" name='orderedQuantity' onChange={handleQuantityChange} placeholder="You can purchase upto 20" defaultValue={1} className="input rounded-md w-full border-pink-600" />
                     </div>
                     <div className="w-full lg:w-1/2">
                         <label className="label">
