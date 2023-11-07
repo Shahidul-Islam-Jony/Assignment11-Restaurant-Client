@@ -2,13 +2,14 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { AiFillDelete } from 'react-icons/ai';
+import { toast, ToastContainer } from "react-toastify";
 
 const MyOrderedorderedFood = () => {
     const { user } = useContext(AuthContext);
     const [orderedFoods, setorderedFoods] = useState([]);
     // console.log(orderedFoods);
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/v1/get-user-orders?email=${user?.email}`)
+        axios.get(`http://localhost:5000/api/v1/get-user-orders?email=${user?.email}`,{withCredentials:true})
             .then(result => {
                 console.log(result.data);
                 setorderedFoods(result.data);
@@ -21,16 +22,37 @@ const MyOrderedorderedFood = () => {
 
     const handleDeleteOrderedFood = (id) => {
         console.log(id);
-        axios.delete(`http://localhost:5000/api/v1/delete-user-single-food/${id}`)
+        axios.delete(`http://localhost:5000/api/v1/delete-user-single-food/${id}`,{withCredentials:true})
             .then(result => {
                 console.log(result.status);
                 if (result.status === 200) {
-                    const remainingOrderedFoods = orderedFoods.filter(orderedFood=>orderedFood._id !== id);
+                    const remainingOrderedFoods = orderedFoods.filter(orderedFood => orderedFood._id !== id);
                     setorderedFoods(remainingOrderedFoods);
+                    toast.success('Delete Successful !', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
                 }
             })
             .catch(error => {
                 console.log(error);
+                toast.error(`${error}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                return;
             })
     }
 
@@ -39,7 +61,7 @@ const MyOrderedorderedFood = () => {
             <h2 className="text-5xl text-center mb-10 font-bold"><span className="border-x-8 border-pink-600 textShadow px-4">Your ordered foods</span></h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {
-                    orderedFoods?.map(orderedFood => <div key={orderedFood._id} className="">
+                    orderedFoods?.map(orderedFood => <div key={orderedFood._id} className="flex">
                         <div className="card bg-violet-200 border-4 border-pink-400 shadow-xl">
                             <figure><img src={orderedFood.image} className="w-full m-2 h-56 rounded-lg" alt={orderedFood.name} /></figure>
                             <div className="card-body">
@@ -56,6 +78,7 @@ const MyOrderedorderedFood = () => {
                     </div>)
                 }
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

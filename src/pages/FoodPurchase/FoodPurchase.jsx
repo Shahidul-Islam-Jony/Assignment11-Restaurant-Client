@@ -14,7 +14,7 @@ const FoodPurchase = () => {
     const { _id, category, description, food_origin, image, made_by, name, price } = food;
     let { count, quantity } = food;
     let [totalPrice, setToatlPrice] = useState(price);
-    let orderedCount = 0 ;
+    let orderedCount = 0;
 
     const handlePurchaseFood = e => {
         e.preventDefault();
@@ -26,7 +26,7 @@ const FoodPurchase = () => {
         const orderedQuantityString = form.orderedQuantity.value;
         const orderedQuantity = parseInt(orderedQuantityString);
 
-        if (user.email === buyerEmail) {
+        if (user.email === made_by) {
             toast.error('You can not buy your own food', {
                 position: "top-center",
                 autoClose: 5000,
@@ -74,7 +74,7 @@ const FoodPurchase = () => {
             return;
         }
 
-        const orderedFood = { count:orderedCount, name, price:totalPrice, quantity: orderedQuantity, buyerName, buyerEmail, foodOwner: made_by, date, image }
+        const orderedFood = { count: orderedCount, name, price: totalPrice, quantity: orderedQuantity, buyerName, buyerEmail, foodOwner: made_by, date, image }
         // console.log(orderedFood);
 
         const updateFood = { category, description, count, food_origin, image, made_by, name, price, quantity }

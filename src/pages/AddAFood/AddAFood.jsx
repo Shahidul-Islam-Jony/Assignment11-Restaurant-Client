@@ -59,13 +59,13 @@ const AddAFood = () => {
                 <div className="flex flex-col lg:flex-row gap-4">
                     <div className="w-full lg:w-1/2">
                         <label className="label">
-                            <span className="text-xl font-medium">Name</span>
+                            <span className="text-xl font-medium">Food Name</span>
                         </label>
                         <input type="text" name='name' placeholder="Food name" className="input rounded-md w-full border-pink-600" required />
                     </div>
                     <div className="w-full lg:w-1/2">
                         <label className="label">
-                            <span className="text-xl font-medium">Category</span>
+                            <span className="text-xl font-medium">Food Category</span>
                         </label>
                         <input type="text" name='category' placeholder="category" className="input rounded-md w-full border-pink-600" required />
                     </div>
@@ -73,7 +73,7 @@ const AddAFood = () => {
                 <div className="flex flex-col lg:flex-row gap-4">
                     <div className="w-full lg:w-1/2">
                         <label className="label">
-                            <span className="text-xl font-medium">Image</span>
+                            <span className="text-xl font-medium">Food Image</span>
                         </label>
                         <input type="text" name='image' placeholder="food image url" className="input rounded-md w-full border-pink-600" required />
                     </div>
@@ -101,7 +101,7 @@ const AddAFood = () => {
                 <div className="flex flex-col lg:flex-row gap-4">
                     <div className="w-full lg:w-1/2">
                         <label className="label">
-                            <span className="text-xl font-medium">Made By</span>
+                            <span className="text-xl font-medium">Add By</span>
                         </label>
                         <input type="text" name='made_by' placeholder="made_by" defaultValue={user?.email} className="input rounded-md w-full border-pink-600" readOnly />
                     </div>
