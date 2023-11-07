@@ -1,11 +1,15 @@
-import useFindFood from "../../hooks/useFindFood";
+import { useEffect, useState } from "react";
 import "../../../src/index.css"
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const TopFood = () => {
-
-    const { topFoods, setTopFoods } = useFindFood();
-    console.log(topFoods);
+    const [topFoods,setTopFoods] = useState([])
+    useEffect(()=>{
+        axios.get('http://localhost:5000/api/v1/sorted-food')
+        .then(res=>setTopFoods(res.data))
+        .catch(error=>console.log(error))
+    },[])
 
     return (
         <div className="mt-16">
