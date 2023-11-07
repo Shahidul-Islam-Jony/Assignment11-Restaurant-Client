@@ -12,6 +12,7 @@ import AddAFood from "../pages/AddAFood/AddAFood";
 import SingleFoodItem from "../pages/SingleFoodItem/SingleFoodItem";
 import FoodPurchase from "../pages/FoodPurchase/FoodPurchase";
 import PrivateRoute from "./PrivateRoute";
+import MyOrderedFood from "../pages/MyOrderedFood/MyOrderedFood";
 
 const router = createBrowserRouter([
     {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
                 path:'/foodPurchase/:id',
                 element:<PrivateRoute><FoodPurchase></FoodPurchase></PrivateRoute>,
                 loader:({params})=>fetch(`http://localhost:5000/api/v1/findSingleFood/${params.id}`)
+            },
+            {
+                path:'/ordered-food',
+                element:<MyOrderedFood></MyOrderedFood>,
             }
         ]
     }

@@ -22,7 +22,6 @@ const MyAddedFoodItems = () => {
     console.log(myAddedFoods);
     return (
         <div>
-            <p>implement search functionality</p>
             <div className="my-10">
                 {
                     myAddedFoods?.map(myAddedFood => <div key={myAddedFood._id}>

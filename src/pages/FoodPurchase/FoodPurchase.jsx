@@ -12,7 +12,7 @@ const FoodPurchase = () => {
     const { user } = useContext(AuthContext);
     console.log(user);
     const { _id, category, description, food_origin, image, made_by, name, price } = food;
-    let { count ,quantity} = food;
+    let { count, quantity } = food;
 
     const handlePurchaseFood = e => {
         e.preventDefault();
@@ -24,28 +24,54 @@ const FoodPurchase = () => {
         const price = form.price.value;
         let quantity = form.quantity.value;
 
-        // if(user.email === buyerEmail){
-        //     toast.error('You can not buy your own food', {
-        //         position: "top-center",
-        //         autoClose: 5000,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         progress: undefined,
-        //         theme: "light",
-        //     });
-        //     return;
-        // }
+        if (user.email === buyerEmail) {
+            toast.error('You can not buy your own food', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return;
+        }
 
-        console.log(count,quantity);
+        // console.log(count,quantity);
 
         if (quantity !== 0) {
             count += 1;
             quantity -= 1;
         }
+        if (quantity === 0) {
+            toast.error('Sorry!! item is not available for now', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return;
+        }
+        if (count > 20) {
+            toast.error('Sorry! You can not buy more than 20', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return;
+        }
 
-        const orderedFood = { count, name, price, quantity, buyerName, buyerEmail, date }
+        const orderedFood = { count, name, price, quantity, buyerName, buyerEmail,foodOwner:made_by, date, image }
         // console.log(orderedFood);
 
         const updateFood = { category, description, count, food_origin, image, made_by, name, price, quantity }
