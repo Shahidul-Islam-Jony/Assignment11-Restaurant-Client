@@ -1,6 +1,6 @@
 
 import { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
@@ -11,6 +11,7 @@ const FoodPurchase = () => {
     console.log(food);
     const { user } = useContext(AuthContext);
     // console.log(user);
+    const navigate = useNavigate();
     const { _id, category, description, food_origin, image, made_by, name, price } = food;
     let { count, quantity } = food;
     let [totalPrice, setToatlPrice] = useState(price);
@@ -42,11 +43,7 @@ const FoodPurchase = () => {
 
         // console.log(count,quantity);
 
-        if (quantity !== 0) {
-            orderedCount += orderedQuantity;
-            count += orderedQuantity;
-            quantity -= orderedQuantity;
-        }
+
         if (quantity === 0) {
             toast.error('Sorry!! item is not available for now', {
                 position: "top-center",
@@ -60,8 +57,8 @@ const FoodPurchase = () => {
             });
             return;
         }
-        if (count > 20) {
-            toast.error('Sorry! You can not buy more than 20', {
+        if (orderedQuantity > quantity) {
+            toast.error(`Sorry! only ${quantity} piece available`, {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -72,6 +69,12 @@ const FoodPurchase = () => {
                 theme: "light",
             });
             return;
+        }
+
+        if (quantity !== 0) {
+            orderedCount += orderedQuantity;
+            count += orderedQuantity;
+            quantity -= orderedQuantity;
         }
 
         const orderedFood = { count: orderedCount, name, price: totalPrice, quantity: orderedQuantity, buyerName, buyerEmail, foodOwner: made_by, date, image }
@@ -93,6 +96,7 @@ const FoodPurchase = () => {
                     progress: undefined,
                     theme: "light",
                 });
+                navigate(-1)
             })
             .catch(error => {
                 toast.error(`${error}`, {

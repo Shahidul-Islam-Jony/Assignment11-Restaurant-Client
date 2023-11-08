@@ -40,15 +40,15 @@ const AllFoodItems = () => {
                 <p className="text-3xl font-medium text-center">Search specific food by name : </p>
                 <div className="form-control">
                     <form onSubmit={handleSearch} className="input-group">
-                        <input type="text" name="search" placeholder="Search…" className="input input-bordered w-96" />
-                        <button className="btn btn-square">
+                        <input type="text" name="search" placeholder="Search…" className="input border-pink-600 w-96" />
+                        <button className="btn w-20 bg-pink-600 text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                         </button>
                     </form>
                 </div>
 
             </div>
-            <div className="mt-28 mb-10">
+            <div className="mt-20 mb-10">
                 <h2 className="text-5xl text-center mb-10 font-bold"><span className="border-x-8 border-pink-600 textShadow px-4">All Foods</span></h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {
