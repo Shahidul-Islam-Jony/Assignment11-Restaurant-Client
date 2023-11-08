@@ -1,11 +1,14 @@
+import { HelmetProvider } from "react-helmet-async";
 import { Link, useLoaderData } from "react-router-dom";
+import DynamicTitle from "../../components/sharedComponents/DynamicTitle";
 
 const SingleFoodItem = () => {
     const food = useLoaderData();
     // console.log(Object.keys(food).join());
     const {_id,name,image,category,price,made_by,food_origin,description} = food;
     return (
-        <div>
+        <HelmetProvider>
+            <DynamicTitle title={`Food-Fantasia | ${name}`}></DynamicTitle>
             <div className="bg-base-200 my-10">
                 <div className="flex flex-col lg:flex-row gap-8">
                     <div className="w-2/3 border-red-300">
@@ -24,7 +27,7 @@ const SingleFoodItem = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </HelmetProvider>
     );
 };
 

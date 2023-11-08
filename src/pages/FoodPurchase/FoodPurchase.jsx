@@ -4,6 +4,8 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
+import { HelmetProvider } from "react-helmet-async";
+import DynamicTitle from "../../components/sharedComponents/DynamicTitle";
 
 
 const FoodPurchase = () => {
@@ -131,57 +133,60 @@ const FoodPurchase = () => {
     }
 
     return (
-        <div className="my-10">
-            <form onSubmit={handlePurchaseFood}>
-                <div className="flex flex-col lg:flex-row gap-4">
-                    <div className="w-full lg:w-1/2">
-                        <label className="label">
-                            <span className="text-xl font-medium">Food Name</span>
-                        </label>
-                        <input type="text" name='name' placeholder="Food name" defaultValue={name} className="input rounded-md w-full border-pink-600" readOnly />
+        <HelmetProvider>
+            <DynamicTitle title='Food-Fantasia | Food-Purchase'></DynamicTitle>
+            <div className="my-10">
+                <form onSubmit={handlePurchaseFood}>
+                    <div className="flex flex-col lg:flex-row gap-4">
+                        <div className="w-full lg:w-1/2">
+                            <label className="label">
+                                <span className="text-xl font-medium">Food Name</span>
+                            </label>
+                            <input type="text" name='name' placeholder="Food name" defaultValue={name} className="input rounded-md w-full border-pink-600" readOnly />
+                        </div>
+                        <div className="w-full lg:w-1/2">
+                            <label className="label">
+                                <span className="text-xl font-medium">Price</span>
+                            </label>
+                            <input type="text" name='price' placeholder="category" defaultValue={totalPrice} className="input rounded-md w-full border-pink-600" readOnly />
+                        </div>
                     </div>
-                    <div className="w-full lg:w-1/2">
-                        <label className="label">
-                            <span className="text-xl font-medium">Price</span>
-                        </label>
-                        <input type="text" name='price' placeholder="category" defaultValue={totalPrice} className="input rounded-md w-full border-pink-600" readOnly />
+                    <div className="flex flex-col lg:flex-row gap-4">
+                        <div className="w-full lg:w-1/2">
+                            <label className="label">
+                                <span className="text-xl font-medium">Quantity</span>
+                            </label>
+                            <input type="text" name='orderedQuantity' onChange={handleQuantityChange} placeholder="You can purchase upto 20" defaultValue={1} className="input rounded-md w-full border-pink-600" />
+                        </div>
+                        <div className="w-full lg:w-1/2">
+                            <label className="label">
+                                <span className="text-xl font-medium">Buyer Name</span>
+                            </label>
+                            <input type="text" name='buyerName' placeholder="buyer_name" defaultValue={user?.displayName} className="input rounded-md w-full border-pink-600" readOnly />
+                        </div>
                     </div>
-                </div>
-                <div className="flex flex-col lg:flex-row gap-4">
-                    <div className="w-full lg:w-1/2">
-                        <label className="label">
-                            <span className="text-xl font-medium">Quantity</span>
-                        </label>
-                        <input type="text" name='orderedQuantity' onChange={handleQuantityChange} placeholder="You can purchase upto 20" defaultValue={1} className="input rounded-md w-full border-pink-600" />
+                    <div className="flex flex-col lg:flex-row gap-4">
+                        <div className="w-full lg:w-1/2">
+                            <label className="label">
+                                <span className="text-xl font-medium">Buyer Email</span>
+                            </label>
+                            <input type="text" name='buyerEmail' placeholder="buyer_email" defaultValue={user?.email} className="input rounded-md w-full border-pink-600" readOnly />
+                        </div>
+                        <div className="w-full lg:w-1/2">
+                            <label className="label">
+                                <span className="text-xl font-medium">Buying Date</span>
+                            </label>
+                            <input type="date" name='date' defaultValue={Date} className="input rounded-md w-full border-pink-600" required />
+                        </div>
                     </div>
-                    <div className="w-full lg:w-1/2">
-                        <label className="label">
-                            <span className="text-xl font-medium">Buyer Name</span>
-                        </label>
-                        <input type="text" name='buyerName' placeholder="buyer_name" defaultValue={user?.displayName} className="input rounded-md w-full border-pink-600" readOnly />
-                    </div>
-                </div>
-                <div className="flex flex-col lg:flex-row gap-4">
-                    <div className="w-full lg:w-1/2">
-                        <label className="label">
-                            <span className="text-xl font-medium">Buyer Email</span>
-                        </label>
-                        <input type="text" name='buyerEmail' placeholder="buyer_email" defaultValue={user?.email} className="input rounded-md w-full border-pink-600" readOnly />
-                    </div>
-                    <div className="w-full lg:w-1/2">
-                        <label className="label">
-                            <span className="text-xl font-medium">Buying Date</span>
-                        </label>
-                        <input type="date" name='date' defaultValue={Date} className="input rounded-md w-full border-pink-600" required />
-                    </div>
-                </div>
 
-                <div className='text-center mt-4'>
-                    <button className="btn btn-secondary w-full">Purchase</button>
-                </div>
-            </form>
-            <ToastContainer></ToastContainer>
-        </div>
+                    <div className='text-center mt-4'>
+                        <button className="btn btn-secondary w-full">Purchase</button>
+                    </div>
+                </form>
+                <ToastContainer></ToastContainer>
+            </div>
+        </HelmetProvider>
     );
 
 };

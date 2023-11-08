@@ -2,11 +2,14 @@ import { NavLink, Outlet } from "react-router-dom";
 import Banner from "../../components/HomeComponents/Banner/Banner";
 import DineWithUs from "../../components/HomeComponents/DineWithUs/DineWithUs";
 import TopFood from "../../components/HomeComponents/TopFood/TopFood";
+import { HelmetProvider } from "react-helmet-async";
+import DynamicTitle from "../../components/sharedComponents/DynamicTitle";
 
 
 const Home = () => {
     return (
-        <div>
+        <HelmetProvider>
+            <DynamicTitle title='Food-Fantasia'></DynamicTitle>
             <Banner></Banner>
             <TopFood></TopFood>
             <DineWithUs></DineWithUs>
@@ -24,7 +27,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </HelmetProvider>
     );
 };
 

@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import DynamicTitle from "../../components/sharedComponents/DynamicTitle";
 
 const MyAddedFoodItems = () => {
     const { user } = useContext(AuthContext);
@@ -21,7 +23,8 @@ const MyAddedFoodItems = () => {
 
     console.log(myAddedFoods);
     return (
-        <div>
+        <HelmetProvider>
+            <DynamicTitle title='Food-Fantasia | My-Added-Food'></DynamicTitle>
             <div className="my-10">
                 {
                     myAddedFoods?.map(myAddedFood => <div key={myAddedFood._id}>
@@ -63,7 +66,7 @@ const MyAddedFoodItems = () => {
                     </div>)
                 }
             </div>
-        </div>
+        </HelmetProvider>
     );
 };
 
