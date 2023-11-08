@@ -5,6 +5,7 @@ import { AiFillDelete } from 'react-icons/ai';
 import { toast, ToastContainer } from "react-toastify";
 import { HelmetProvider } from "react-helmet-async";
 import DynamicTitle from "../../components/sharedComponents/DynamicTitle";
+import { RotatingLines } from "react-loader-spinner";
 
 const MyOrderedorderedFood = () => {
     const { user } = useContext(AuthContext);
@@ -65,7 +66,7 @@ const MyOrderedorderedFood = () => {
                 <h2 className="text-5xl text-center mb-10 font-bold"><span className="border-x-8 border-pink-600 textShadow px-4">Your ordered foods</span></h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {
-                        orderedFoods?.map(orderedFood => <div key={orderedFood._id} className="flex">
+                        orderedFoods ? orderedFoods.map(orderedFood => <div key={orderedFood._id} className="flex">
                             <div className="card bg-violet-200 border-4 border-pink-400 shadow-xl">
                                 <figure><img src={orderedFood.image} className="w-full m-2 h-56 rounded-lg" alt={orderedFood.name} /></figure>
                                 <div className="card-body">
@@ -79,7 +80,16 @@ const MyOrderedorderedFood = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>)
+                        </div>) :
+                            <div className="flex justify-center mt-10">
+                                <RotatingLines
+                                    strokeColor="grey"
+                                    strokeWidth="5"
+                                    animationDuration="0.75"
+                                    width="96"
+                                    visible={true}
+                                />
+                            </div>
                     }
                 </div>
                 <ToastContainer></ToastContainer>

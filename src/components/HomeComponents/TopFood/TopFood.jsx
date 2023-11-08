@@ -17,7 +17,7 @@ const TopFood = () => {
             <h2 className="text-5xl text-center mb-10 font-bold"><span className="border-x-8 border-pink-600 textShadow px-4">Top Foods</span></h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {
-                    topFoods?.map(food => <motion.div whileHover={{scale: 1.1}} whileTap={{scale:0.9}} key={food._id}>
+                    topFoods?.map(food => <motion.div whileHover={{scale: 1.1}} key={food._id}>
                         <div className="card bg-violet-200 border-4 border-pink-400 shadow-xl">
                             <figure><img src={food.image} className="w-full m-2 h-56 rounded-lg" alt={food.name} /></figure>
                             <div className="card-body">

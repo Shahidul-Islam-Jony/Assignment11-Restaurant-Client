@@ -1,8 +1,12 @@
-# React + Vite
+#### assignment_category_0005
+## 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Food Fantasia & Live Link : https://assignment11-restaurant.web.app
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Feature of Projects
+* You can see and ordered all food of our restaurant
+* You can register and add food to restaurant
+* You can choose breakfast Lunch or Dinner from our restaurant site
+* You can see your added food and also update your added food
+* You can see your ordered food also and if you need you can delete your ordered food

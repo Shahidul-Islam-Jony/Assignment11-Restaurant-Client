@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import DynamicTitle from "../../components/sharedComponents/DynamicTitle";
 import { HelmetProvider } from "react-helmet-async";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import { RotatingLines } from 'react-loader-spinner';
+
 
 const AllFoodItems = () => {
     const { count } = useLoaderData();
@@ -39,16 +41,16 @@ const AllFoodItems = () => {
 
     return (
         <HelmetProvider>
-            <div className="mt-16">
+            <div className="mt-16 z-10">
                 {/* for dynamic title */}
                 <DynamicTitle title='Food-Fantasia | All Food Items'></DynamicTitle>
 
-                <div className="flex justify-center items-center gap-4">
+                <div className="flex flex-col md:flex-row justify-center items-center gap-4">
                     <p className="text-3xl font-medium text-center">Search specific food by name : </p>
                     <div className="form-control">
                         <form onSubmit={handleSearch} className="input-group">
-                            <input type="text" name="search" placeholder="Search…" className="input border-pink-600 w-96" />
-                            <button className="btn w-20 bg-pink-600 text-white">
+                            <input type="text" name="search" placeholder="Search…" className="input border-pink-600 md:w-96" />
+                            <button className="btn md:w-20 bg-pink-600 text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                             </button>
                         </form>
@@ -60,7 +62,7 @@ const AllFoodItems = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {
 
-                            foods?.map(food => <motion.div whileHover={{scale: 1.1}} whileTap={{scale:0.9}} key={food._id} className="">
+                            foods ? foods.map(food => <motion.div whileHover={{ scale: 1.1 }} key={food._id} className="">
                                 <div className="card bg-violet-200 border-4 border-pink-400 shadow-xl">
                                     <figure><img src={food.image} className="w-full m-2 h-56 rounded-lg" alt={food.name} /></figure>
                                     <div className="card-body">
@@ -73,7 +75,17 @@ const AllFoodItems = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </motion.div>)
+                            </motion.div>) :
+                                // loading spinner
+                                <div className="flex justify-center items-center">
+                                    <RotatingLines
+                                        strokeColor="grey"
+                                        strokeWidth="5"
+                                        animationDuration="0.75"
+                                        width="96"
+                                        visible={true}
+                                    />
+                                </div>
                         }
                     </div>
                 </div>

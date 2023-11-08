@@ -79,7 +79,7 @@ const Navbar = () => {
                                             <img src={user.photoURL} title={user.displayName} />
                                         </div>
                                     </label>
-                                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52 font-medium">
+                                    <ul tabIndex={0} className="mt-3 z-50 p-2 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-52 font-medium">
                                         <li><Link to='/my-added-food-items'>My added food items</Link></li>
                                         <li><Link to='/addFood'>Add a food item</Link></li>
                                         <li><Link to="/ordered-food">My ordered food items</Link></li>

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import DynamicTitle from "../../components/sharedComponents/DynamicTitle";
+import { RotatingLines } from "react-loader-spinner";
 
 const MyAddedFoodItems = () => {
     const { user } = useContext(AuthContext);
@@ -11,7 +12,7 @@ const MyAddedFoodItems = () => {
     const [myAddedFoods, setMyAddedFoods] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://assignment-11-server-mauve.vercel.app/api/v1/myAddedFoods?email=${user?.email}`,{withCredentials:true})
+        axios.get(`https://assignment-11-server-mauve.vercel.app/api/v1/myAddedFoods?email=${user?.email}`, { withCredentials: true })
             .then(result => {
                 // console.log(result.data);
                 setMyAddedFoods(result.data);
@@ -27,7 +28,7 @@ const MyAddedFoodItems = () => {
             <DynamicTitle title='Food-Fantasia | My-Added-Food'></DynamicTitle>
             <div className="my-10">
                 {
-                    myAddedFoods?.map(myAddedFood => <div key={myAddedFood._id}>
+                    myAddedFoods ? myAddedFoods.map(myAddedFood => <div key={myAddedFood._id}>
 
 
                         <div className="overflow-x-auto">
@@ -61,9 +62,16 @@ const MyAddedFoodItems = () => {
                                 </tbody>
                             </table>
                         </div>
-
-
-                    </div>)
+                    </div>) :
+                        <div className="flex justify-center mt-10">
+                            <RotatingLines
+                                strokeColor="grey"
+                                strokeWidth="5"
+                                animationDuration="0.75"
+                                width="96"
+                                visible={true}
+                            />
+                        </div>
                 }
             </div>
         </HelmetProvider>
