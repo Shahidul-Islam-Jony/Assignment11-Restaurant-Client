@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Grilled Salmon",
+        "image": "https://i.ibb.co/2kqc1Bp/Grilled-Salmon.jpg",
+        "category": "Dinner",
+        "price": 12.99,
+        "quantity": 20,
+        "count": 0,
+        "made_by": "shahidulislam@gmail.com",
+        "food_origin": "Norway",
+        "description": "Grilled salmon fillet served with lemon and dill sauce."
+    },
+    {
+        "name": "Pasta Alfredo",
+        "image": "https://i.ibb.co/whfgJTt/Pasta-Alfredo.jpg",
+        "category": "Dinner",
+        "price": 10.99,
+        "quantity": 20,
+        "count": 0,
+        "made_by": "jony@gmail.com",
+        "food_origin": "Italy",
+        "description": "Creamy pasta with Parmesan cheese and a hint of garlic."
+    },
+    {
+        "name": "Steak with Mashed Potatoes",
+        "image": "https://i.ibb.co/vzyw918/Steak-with-Mashed-Potatoes.jpg",
+        "category": "Dinner",
+        "price": 14.99,
+        "quantity": 20,
+        "count": 0,
+        "made_by": "shahidulislam@gmail.com",
+        "food_origin": "Argentina",
+        "description": "Juicy steak with creamy mashed potatoes and gravy."
+    }
+]

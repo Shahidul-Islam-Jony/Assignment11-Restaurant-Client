@@ -1,0 +1,38 @@
+[
+    {
+        "_id":"64581fs21s4f1s4",
+        "name": "Pancakes",
+        "image": "https://i.ibb.co/ZHWL6Rv/Pancakes.jpg",
+        "category": "Breakfast",
+        "price": 5.99,
+        "quantity": 1,
+        "count": 0,
+        "made_by": "shahidulislam@gmail.com",
+        "food_origin": "United States",
+        "description": "Delicious fluffy pancakes served with maple syrup and butter."
+    },
+    {
+        "_id":"64581f451s4f1s4",
+        "name": "Omelette",
+        "image": "https://i.ibb.co/6H582dm/Omelette.jpg",
+        "category": "Breakfast",
+        "price": 7.99,
+        "quantity": 1,
+        "count": 0,
+        "made_by": "jony@gmail.com",
+        "food_origin": "Various",
+        "description": "Customizable omelette with your choice of fillings."
+    },
+    {
+        "_id":"64581fs21s478s4",
+        "name": "Yogurt Parfait",
+        "image": "https://i.ibb.co/1Qk6Pzn/Yogurt-Parfait.jpg",
+        "category": "Breakfast",
+        "price": 4.99,
+        "quantity": 1,
+        "count": 0,
+        "made_by": "shahidulislam@gmail.com",
+        "food_origin": "Greece",
+        "description": "Creamy yogurt layered with granola, berries, and honey."
+    }
+]

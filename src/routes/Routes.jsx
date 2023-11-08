@@ -13,6 +13,10 @@ import SingleFoodItem from "../pages/SingleFoodItem/SingleFoodItem";
 import FoodPurchase from "../pages/FoodPurchase/FoodPurchase";
 import PrivateRoute from "./PrivateRoute";
 import MyOrderedFood from "../pages/MyOrderedFood/MyOrderedFood";
+import Breakfast from "../components/HomeComponents/Breakfast/Breakfast";
+import Lunch from "../components/HomeComponents/Lunch/Lunch";
+import Dinner from "../components/HomeComponents/Dinner/Dinner";
+
 
 const router = createBrowserRouter([
     {
@@ -22,7 +26,21 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home></Home>,
+                children:[
+                    {
+                        path:'/',
+                        element:<Breakfast></Breakfast>
+                    },
+                    {
+                        path:'/lunch',
+                        element:<Lunch></Lunch>
+                    },
+                    {
+                        path:'/dinner',
+                        element:<Dinner></Dinner>
+                    }
+                ]
             },
             {
                 path: '/all-food-items',
@@ -68,6 +86,7 @@ const router = createBrowserRouter([
                 element:<MyOrderedFood></MyOrderedFood>,
             }
         ]
+
     }
 ])
 

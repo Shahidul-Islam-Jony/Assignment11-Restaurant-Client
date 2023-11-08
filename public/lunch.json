@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Chicken Caesar Salad",
+        "image": "https://i.ibb.co/Kjq7BGD/Chicken-Caesar-Salad.jpg",
+        "category": "Lunch",
+        "price": 9.99,
+        "quantity": 20,
+        "count": 0,
+        "made_by": "jony@gmail.com",
+        "food_origin": "Italy",
+        "description": "Classic Caesar salad with grilled chicken and homemade dressing."
+    },
+    {
+        "name": "Vegetable Stir-Fry",
+        "image": "https://i.ibb.co/31jLNBm/Vegetable-Stir-Fry.jpg",
+        "category": "Lunch",
+        "price": 8.99,
+        "quantity": 20,
+        "count": 0,
+        "made_by": "shahidulislam@gmail.com",
+        "food_origin": "Asia",
+        "description": "Fresh vegetables stir-fried in a savory sauce."
+    },
+    {
+        "name": "Grilled Cheese Sandwich",
+        "image": "https://i.ibb.co/9gRvJ28/Grilled-Cheese-Sandwich.jpg",
+        "category": "Lunch",
+        "price": 6.99,
+        "quantity": 20,
+        "count": 0,
+        "made_by": "jony@gmail.com",
+        "food_origin": "United States",
+        "description": "Melted cheese between slices of toasted bread."
+    }
+]
