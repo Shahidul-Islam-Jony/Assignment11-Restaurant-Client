@@ -11,7 +11,7 @@ const MyOrderedorderedFood = () => {
     const [orderedFoods, setorderedFoods] = useState([]);
     // console.log(orderedFoods);
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/v1/get-user-orders?email=${user?.email}`, { withCredentials: true })
+        axios.get(`https://assignment-11-server-mauve.vercel.app/api/v1/get-user-orders?email=${user?.email}`, { withCredentials: true })
             .then(result => {
                 console.log(result.data);
                 setorderedFoods(result.data);
@@ -24,7 +24,7 @@ const MyOrderedorderedFood = () => {
 
     const handleDeleteOrderedFood = (id) => {
         console.log(id);
-        axios.delete(`http://localhost:5000/api/v1/delete-user-single-food/${id}`, { withCredentials: true })
+        axios.delete(`https://assignment-11-server-mauve.vercel.app/api/v1/delete-user-single-food/${id}`, { withCredentials: true })
             .then(result => {
                 console.log(result.status);
                 if (result.status === 200) {

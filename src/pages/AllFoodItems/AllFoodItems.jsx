@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import DynamicTitle from "../../components/sharedComponents/DynamicTitle";
 import { HelmetProvider } from "react-helmet-async";
+import { motion } from "framer-motion"
 
 const AllFoodItems = () => {
     const { count } = useLoaderData();
@@ -16,7 +17,7 @@ const AllFoodItems = () => {
     const [foods, setFoods] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/v1/allFoods?page=${currentPage}&size=${foodsPerPage}`)
+        axios.get(`https://assignment-11-server-mauve.vercel.app/api/v1/allFoods?page=${currentPage}&size=${foodsPerPage}`)
             .then(result => {
                 console.log(result.data)
                 setFoods(result.data);
@@ -59,7 +60,7 @@ const AllFoodItems = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {
 
-                            foods?.map(food => <div key={food._id} className="">
+                            foods?.map(food => <motion.div whileHover={{scale: 1.1}} whileTap={{scale:0.9}} key={food._id} className="">
                                 <div className="card bg-violet-200 border-4 border-pink-400 shadow-xl">
                                     <figure><img src={food.image} className="w-full m-2 h-56 rounded-lg" alt={food.name} /></figure>
                                     <div className="card-body">
@@ -72,7 +73,7 @@ const AllFoodItems = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>)
+                            </motion.div>)
                         }
                     </div>
                 </div>

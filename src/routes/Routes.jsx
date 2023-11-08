@@ -45,12 +45,12 @@ const router = createBrowserRouter([
             {
                 path: '/all-food-items',
                 element: <AllFoodItems></AllFoodItems>,
-                loader:()=>fetch('http://localhost:5000/api/v1/totalFood')
+                loader:()=>fetch('https://assignment-11-server-mauve.vercel.app/api/v1/totalFood')
             },
             {
                 path:'/single-food-item/:id',
                 element:<SingleFoodItem></SingleFoodItem>,
-                loader:({params})=>fetch(`http://localhost:5000/api/v1/findSingleFood/${params.id}`)
+                loader:({params})=>fetch(`https://assignment-11-server-mauve.vercel.app/api/v1/findSingleFood/${params.id}`)
             },
             {
                 path:'/blog',
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
             {
                 path:'/updateFood/:id',
                 element:<UpdateFood></UpdateFood>,
-                loader:({params})=>fetch(`http://localhost:5000/api/v1/findSingleFood/${params.id}`)
+                loader:({params})=>fetch(`https://assignment-11-server-mauve.vercel.app/api/v1/findSingleFood/${params.id}`)
             },
             {
                 path:'/addFood',
@@ -79,7 +79,7 @@ const router = createBrowserRouter([
             {
                 path:'/foodPurchase/:id',
                 element:<PrivateRoute><FoodPurchase></FoodPurchase></PrivateRoute>,
-                loader:({params})=>fetch(`http://localhost:5000/api/v1/findSingleFood/${params.id}`)
+                loader:({params})=>fetch(`https://assignment-11-server-mauve.vercel.app/api/v1/findSingleFood/${params.id}`)
             },
             {
                 path:'/ordered-food',

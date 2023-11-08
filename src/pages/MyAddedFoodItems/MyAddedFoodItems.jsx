@@ -11,7 +11,7 @@ const MyAddedFoodItems = () => {
     const [myAddedFoods, setMyAddedFoods] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/v1/myAddedFoods?email=${user?.email}`,{withCredentials:true})
+        axios.get(`https://assignment-11-server-mauve.vercel.app/api/v1/myAddedFoods?email=${user?.email}`,{withCredentials:true})
             .then(result => {
                 // console.log(result.data);
                 setMyAddedFoods(result.data);

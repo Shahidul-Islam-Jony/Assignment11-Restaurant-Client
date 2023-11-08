@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { motion } from "framer-motion"
 
 const Lunch = () => {
     const { user } = useContext(AuthContext);
@@ -36,7 +37,7 @@ const Lunch = () => {
             return;
         }
 
-        axios.post('http://localhost:5000/api/v1/user-orders', orderedFood)
+        axios.post('https://assignment-11-server-mauve.vercel.app/api/v1/user-orders', orderedFood)
             .then(result => {
                 console.log(result);
                 toast.success('Food Purchase Successful !', {
@@ -71,7 +72,7 @@ const Lunch = () => {
             <div className="">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 p-4 flex-wrap gap-4">
                     {
-                        foods?.map(food => <div key={food._id} className="">
+                        foods?.map(food => <motion.div whileHover={{scale: 1.1}} whileTap={{scale:0.9}} key={food._id}>
                             <div className="card relative bg-violet-200 border-4 border-pink-400 shadow-xl">
                                 <figure><img src={food.image} className="w-full m-2 h-56 rounded-lg" alt={food.name} /></figure>
                                 <div className="card-body absolute">
@@ -82,7 +83,7 @@ const Lunch = () => {
                                     <button onClick={() => handlePurchaseFood(food._id)} className="bg-pink-600 btn btn-sm text-white">Purchase</button>
                                 </div>
                             </div>
-                        </div>)
+                        </motion.div>)
                     }
                 </div>
             </div>

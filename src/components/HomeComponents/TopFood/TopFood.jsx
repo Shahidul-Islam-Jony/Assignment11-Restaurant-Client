@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import "../../../../src/index.css"
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion"
 
 const TopFood = () => {
     const [topFoods,setTopFoods] = useState([])
     useEffect(()=>{
-        axios.get('http://localhost:5000/api/v1/sorted-food')
+        axios.get('https://assignment-11-server-mauve.vercel.app/api/v1/sorted-food')
         .then(res=>setTopFoods(res.data))
         .catch(error=>console.log(error))
     },[])
@@ -16,7 +17,7 @@ const TopFood = () => {
             <h2 className="text-5xl text-center mb-10 font-bold"><span className="border-x-8 border-pink-600 textShadow px-4">Top Foods</span></h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {
-                    topFoods?.map(food => <div key={food._id} className="">
+                    topFoods?.map(food => <motion.div whileHover={{scale: 1.1}} whileTap={{scale:0.9}} key={food._id}>
                         <div className="card bg-violet-200 border-4 border-pink-400 shadow-xl">
                             <figure><img src={food.image} className="w-full m-2 h-56 rounded-lg" alt={food.name} /></figure>
                             <div className="card-body">
@@ -28,7 +29,7 @@ const TopFood = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>)
+                    </motion.div>)
                 }
             </div>
             <div className="my-7 text-center">

@@ -52,13 +52,13 @@ const AuthProvider = ({ children }) => {
             setLoading(false);
             // jwt token
             if (currentUser) {
-                axios.post('http://localhost:5000/api/v1/jwt', userEmail, { withCredentials: true })
+                axios.post('https://assignment-11-server-mauve.vercel.app/api/v1/jwt', userEmail, { withCredentials: true })
                     .then(result => {
                         console.log(result.data);
                     })
             }
             else {
-                axios.post('http://localhost:5000/api/v1/logout',userEmail,{
+                axios.post('https://assignment-11-server-mauve.vercel.app/api/v1/logout',userEmail,{
                     withCredentials:true
                 })
                 .then(result=>{

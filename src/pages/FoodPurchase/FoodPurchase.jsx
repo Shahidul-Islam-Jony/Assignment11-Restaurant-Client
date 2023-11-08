@@ -85,7 +85,7 @@ const FoodPurchase = () => {
         const updateFood = { category, description, count, food_origin, image, made_by, name, price, quantity }
         // console.log(updateFood);
 
-        axios.post('http://localhost:5000/api/v1/user-orders', orderedFood)
+        axios.post('https://assignment-11-server-mauve.vercel.app/api/v1/user-orders', orderedFood)
             .then(result => {
                 console.log(result);
                 toast.success('Food Purchase Successful !', {
@@ -114,7 +114,7 @@ const FoodPurchase = () => {
                 return;
             })
 
-        axios.patch(`http://localhost:5000/api/v1/updateFood/${_id}`, updateFood)
+        axios.patch(`https://assignment-11-server-mauve.vercel.app/api/v1/updateFood/${_id}`, updateFood)
             .then(result => {
                 console.log(result);
             })

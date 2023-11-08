@@ -24,7 +24,7 @@ const AddAFood = () => {
         const newFood = { category, count: 0, description, food_origin, image, made_by, name, price, quantity }
         console.log(newFood);
 
-        axios.post('http://localhost:5000/api/v1/addFood', newFood)
+        axios.post('https://assignment-11-server-mauve.vercel.app/api/v1/addFood', newFood)
             .then(result => {
                 console.log(result);
                 toast.success('Food Added Successfuly !', {
