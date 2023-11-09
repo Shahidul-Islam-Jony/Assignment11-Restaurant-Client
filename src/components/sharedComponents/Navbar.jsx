@@ -40,7 +40,7 @@ const Navbar = () => {
         <div>
             <div className="py-4 flex justify-between items-center bg-base-100">
                 <div className="flex items-center">
-                    <div className="drawer w-10 lg:hidden">
+                    <div className="drawer z-50 w-10 lg:hidden">
                         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                         <div className="drawer-content">
                             {/* Page content here */}
@@ -50,7 +50,7 @@ const Navbar = () => {
                         </div>
                         <div className="drawer-side">
                             <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                            <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                            <ul className="menu p-4 w-80 min-h-full bg-base-300 text-base-content">
                                 {/* Sidebar content here */}
                                 {links}
 

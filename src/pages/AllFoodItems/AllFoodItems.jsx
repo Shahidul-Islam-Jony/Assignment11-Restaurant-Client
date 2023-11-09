@@ -1,10 +1,12 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+
+import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import DynamicTitle from "../../components/sharedComponents/DynamicTitle";
 import { HelmetProvider } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { RotatingLines } from 'react-loader-spinner';
+import { useQuery } from "@tanstack/react-query";
+import { RotatingLines } from "react-loader-spinner";
+import axios from "axios";
 
 
 const AllFoodItems = () => {
@@ -18,16 +20,27 @@ const AllFoodItems = () => {
     // console.log(currentPage);
     const [foods, setFoods] = useState([]);
 
-    useEffect(() => {
-        axios.get(`https://assignment-11-server-mauve.vercel.app/api/v1/allFoods?page=${currentPage}&size=${foodsPerPage}`)
-            .then(result => {
-                console.log(result.data)
-                setFoods(result.data);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }, [currentPage])
+    const { isPending, data } = useQuery({
+        queryKey: [currentPage],
+        queryFn: async () => {
+            const res = await axios.get(`https://assignment-11-server-mauve.vercel.app/api/v1/allFoods?page=${currentPage}&size=${foodsPerPage}`)
+                .then(res => setFoods(res.data))
+            return res.data;
+        }
+    })
+    console.log(data);
+
+    if (isPending) {
+        return <div className="flex justify-center mt-5">
+            <RotatingLines
+                strokeColor="grey"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="96"
+                visible={true}
+            />
+        </div>
+    }
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -35,7 +48,7 @@ const AllFoodItems = () => {
         // console.log(searchName);
         const searchedFood = foods.filter(food => food.name.toLowerCase() === searchName.toLowerCase())
         // console.log(searchedFood);
-        setFoods(searchedFood);
+        setFoods(searchedFood)
     }
 
 
@@ -62,7 +75,7 @@ const AllFoodItems = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {
 
-                            foods ? foods.map(food => <motion.div whileHover={{ scale: 1.1 }} key={food._id} className="">
+                            foods?.map(food => <motion.div whileHover={{ scale: 1.1 }} key={food._id} className="">
                                 <div className="card bg-violet-200 border-4 border-pink-400 shadow-xl">
                                     <figure><img src={food.image} className="w-full m-2 h-56 rounded-lg" alt={food.name} /></figure>
                                     <div className="card-body">
@@ -75,17 +88,7 @@ const AllFoodItems = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </motion.div>) :
-                                // loading spinner
-                                <div className="flex justify-center items-center">
-                                    <RotatingLines
-                                        strokeColor="grey"
-                                        strokeWidth="5"
-                                        animationDuration="0.75"
-                                        width="96"
-                                        visible={true}
-                                    />
-                                </div>
+                            </motion.div>)
                         }
                     </div>
                 </div>

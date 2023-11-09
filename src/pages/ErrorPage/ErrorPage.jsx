@@ -10,10 +10,12 @@ const ErrorPage = () => {
         <HelmetProvider>
             <DynamicTitle title='Error-Page'></DynamicTitle>
             {
-                error?.status === 404 && <div className='text-center'>
-                    <img src={errorImg} className='h-[450px] w-full' alt="" />
-                    <p className='text-5xl font-bold text-center mt-4'>Page Not Found</p>
-                    <Link className='btn btn-secondary mt-4 px-16' to='/'>Go Back to home</Link>
+                error?.status === 404 && <div className='text-center relative'>
+                    <img src={errorImg} className=' h-screen w-full' alt="" />
+                    <div className='absolute bottom-16 right-1/3'>
+                        <p className='text-5xl font-bold text-center mt-4'>Page Not Found</p>
+                        <Link className='btn btn-secondary mt-4 px-16' to='/'>Go Back to home</Link>
+                    </div>
                 </div>
             }
         </HelmetProvider>

@@ -1,26 +1,41 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import DynamicTitle from "../../components/sharedComponents/DynamicTitle";
 import { RotatingLines } from "react-loader-spinner";
+import { useQuery } from "@tanstack/react-query";
 
 const MyAddedFoodItems = () => {
     const { user } = useContext(AuthContext);
     // console.log(user.email);
     const [myAddedFoods, setMyAddedFoods] = useState([]);
 
-    useEffect(() => {
-        axios.get(`https://assignment-11-server-mauve.vercel.app/api/v1/myAddedFoods?email=${user?.email}`, { withCredentials: true })
-            .then(result => {
-                // console.log(result.data);
-                setMyAddedFoods(result.data);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }, [user?.email])
+
+
+    const { isPending, data } = useQuery({
+        queryKey: [user?.email],
+        queryFn: async () => {
+            const res = await axios.get(`https://assignment-11-server-mauve.vercel.app/api/v1/myAddedFoods?email=${user.email}`, { withCredentials: true })
+                // .then(res => res.json())
+                .then(res => setMyAddedFoods(res.data))
+            return res.data;
+        }
+    })
+    console.log(data);
+
+    if (isPending) {
+        return <div className="flex justify-center mt-5">
+            <RotatingLines
+                strokeColor="grey"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="96"
+                visible={true}
+            />
+        </div>
+    }
 
     console.log(myAddedFoods);
     return (

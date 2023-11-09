@@ -1,20 +1,34 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext  } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { motion } from "framer-motion"
+import { useQuery } from "@tanstack/react-query";
+import { RotatingLines } from "react-loader-spinner";
 
 const Dinner = () => {
     const { user } = useContext(AuthContext);
     const buyerName = user?.displayName;
     const buyerEmail = user?.email;
 
-    const [foods, setFoods] = useState([]);
-    useEffect(() => {
-        fetch('dinner.json')
-            .then(res => res.json())
-            .then(data => setFoods(data))
-    }, [])
+    const { isPending, data: foods } = useQuery({
+        queryKey: ['dinner'],
+        queryFn: async () => {
+            const res = await fetch('dinner.json')
+            return res.json();
+        }
+    })
+    if (isPending) {
+        return <div className="flex justify-center mt-5">
+            <RotatingLines
+                strokeColor="grey"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="96"
+                visible={true}
+            />
+        </div>
+    }
     // console.log(foods);
     const handlePurchaseFood = (id) => {
         const food = foods.find(food => food._id === id);

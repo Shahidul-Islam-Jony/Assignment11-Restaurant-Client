@@ -1,28 +1,40 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { AiFillDelete } from 'react-icons/ai';
 import { toast, ToastContainer } from "react-toastify";
 import { HelmetProvider } from "react-helmet-async";
 import DynamicTitle from "../../components/sharedComponents/DynamicTitle";
 import { RotatingLines } from "react-loader-spinner";
+import { useQuery } from "@tanstack/react-query";
 
 const MyOrderedorderedFood = () => {
     const { user } = useContext(AuthContext);
     const [orderedFoods, setorderedFoods] = useState([]);
     // console.log(orderedFoods);
-    useEffect(() => {
-        axios.get(`https://assignment-11-server-mauve.vercel.app/api/v1/get-user-orders?email=${user?.email}`, { withCredentials: true })
-            .then(result => {
-                console.log(result.data);
-                setorderedFoods(result.data);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }, [user?.email])
-    // console.log(orderedFoods);
+    const { isPending, data } = useQuery({
+        queryKey: [user?.email],
+        queryFn: async () => {
+            const res = await axios.get(`https://assignment-11-server-mauve.vercel.app/api/v1/get-user-orders?email=${user.email}`, { withCredentials: true })
+                // .then(res => res.json())
+                .then(res => setorderedFoods(res.data))
+            return res.data;
+        }
+    })
+    console.log(data);
+    console.log(orderedFoods);
 
+    if (isPending) {
+        return <div className="flex justify-center mt-5">
+            <RotatingLines
+                strokeColor="grey"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="96"
+                visible={true}
+            />
+        </div>
+    }
     const handleDeleteOrderedFood = (id) => {
         console.log(id);
         axios.delete(`https://assignment-11-server-mauve.vercel.app/api/v1/delete-user-single-food/${id}`, { withCredentials: true })

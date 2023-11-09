@@ -1,19 +1,34 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { motion } from "framer-motion"
+import { useQuery } from "@tanstack/react-query";
+import { RotatingLines } from "react-loader-spinner";
 
 const Breakfast = () => {
     const { user } = useContext(AuthContext);
     const buyerName = user?.displayName;
     const buyerEmail = user?.email;
-    const [foods, setFoods] = useState([]);
-    useEffect(() => {
-        fetch('breakfast.json')
-            .then(res => res.json())
-            .then(data => setFoods(data))
-    }, [])
+
+    const { isPending, data: foods } = useQuery({
+        queryKey: ['breakfast'],
+        queryFn: async () => {
+            const res = await fetch('breakfast.json')
+            return res.json();
+        }
+    })
+    if (isPending) {
+        return <div className="flex justify-center mt-5">
+            <RotatingLines
+                strokeColor="grey"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="96"
+                visible={true}
+            />
+        </div>
+    }
     // console.log(foods);
 
     const handlePurchaseFood = (id) => {
@@ -71,7 +86,7 @@ const Breakfast = () => {
             <div className="">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 p-4 flex-wrap gap-4">
                     {
-                        foods?.map(food => <motion.div whileHover={{scale: 1.1}} whileTap={{scale:0.9}} key={food._id}>
+                        foods?.map(food => <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} key={food._id}>
                             <div className="card relative bg-violet-200 border-4 border-pink-400 shadow-xl">
                                 <figure><img src={food.image} className="w-full m-2 h-56 rounded-lg" alt={food.name} /></figure>
                                 <div className="card-body absolute">
